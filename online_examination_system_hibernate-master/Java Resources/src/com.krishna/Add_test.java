@@ -16,82 +16,59 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
-
-public class Add_test extends HttpServlet {
-       
-   
-
-       
+@Entity
+@Chachable
+@Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
+public class Add_test extends HttpServlet
+{
+	@Id
+	int test_id
+	String test_name;
+	int Number_question;
+	int num_hour ;
+	int num_min;
+	@ManyToOne
+	Add_subject subject;
+	@OneToMany
+	ArrayList<> question_list =new ArrayList<>();
+    
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
-		Connection con=null;
-		Statement st=null;
+		
 		HttpSession se=req.getSession();
-		try
+		String test_name=req.getParameter("test_name");
+		int Number_question =Integer.parseInt(req.getParameter("Number_question"));
+		int num_hour=Integer.parseInt(req.getParameter("hours"));
+		int num_min=Integer.parseInt(req.getParameter("minute"));
+		String Subject=(String) se.getAttribute("subject");
+		pr.println(Subject);
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Add_subject.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Quary q=hibernet_session.createQuary("select subject_id from Add_subject where subject =:sub");
+		q.setPrameter("sub", Subject);
+		Integer id=p.uniqueResult();
+		Transection tx=hibernet_session.biginTransection();
+		Add_subject add_sub=hibernet_session.get(Add_subject.class,id);
+		ArrayList<Add_test> test_list=add_sub.Add_test;
+		if(test_list.contais(test_name))
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_examination_syatem","root","");
-		    st =(Statement) con.createStatement();
-			String test_name=req.getParameter("test_name");
-			int Number_question =Integer.parseInt(req.getParameter("Number_question"));
-			int num_hour=Integer.parseInt(req.getParameter("hours"));
-			int num_min=Integer.parseInt(req.getParameter("minute"));
-			PrintWriter pr=res.getWriter();
-			String Subject=(String) se.getAttribute("subject");
-			pr.println(Subject);
-			ResultSet rs =st.executeQuery("select Test_Name from  "+se.getAttribute("email")+Subject+"  where Test_Name = '"+test_name+"'");
-			if(rs.next())
-			{
-				se.setAttribute("test_exist_error","given test is Alraidy Exist ");
-				res.sendRedirect("add_testT.jsp");
-			}
-			else
-			{
-				PreparedStatement pst=(PreparedStatement) con.prepareStatement("insert into "
-			+se.getAttribute("email")+Subject+ "( Test_Name ,"
-						+ " Number_Question , hour , minute) values(? , ? , ? , ?)");
-				pst.setString(1,test_name);
-				pst.setInt(2, Number_question);
-				pst.setInt(3, num_hour );
-				pst.setInt(4, num_min);
-				pst.executeUpdate();
-				String str="CREATE TABLE  "+se.getAttribute("email")+Subject+test_name+"(  Que_id int AUTO_INCREMENT , "
-						+ "Question varchar(80),OptionI varchar(80),OptionII varchar(80)"
-						+ ",OptionIII varchar(80),OptionIV varchar(80),Answer int,PRIMARY KEY(Que_id))";
-				st=(Statement) con.createStatement();
-				st.execute(str);
-				se.setAttribute("test",test_name);
-				
-				if(se.getAttribute("number_of_question")==null)
-					se.setAttribute("number_of_question", Number_question);
-				pst.close();
-
-				add_all_Question ad=new add_all_Question();
-				ad.get(req, res);
-			}
-		} 
-		catch (ClassNotFoundException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (SQLException e)
-		{
-			e.printStackTrace();
+			se.setAttribute("test_exist_error","given test is Alraidy Exist ");
+			res.sendRedirect("add_testT.jsp");
 		}
-		finally
+		else
 		{
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Add_teat new_test=new Add_test();
+			new_test.test_name=test_name;
+			new_test.Number_question=Number_question;
+			new_test.num_hour=num_hour ;
+			new_test.num_min=num_min;
+			test_list.add(new_test);
 			
-			try {
-				st.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
+		tx.comit();
+		
 	}
 
 }
