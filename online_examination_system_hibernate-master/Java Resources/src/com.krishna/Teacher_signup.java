@@ -22,6 +22,7 @@ public class Teacher_signup extends HttpServlet
 	String last_name;
 	String email_eddress;
 	String password;
+	@OneToMany(MappedBy="ts")
 	ArraList<Add_subject> subject_list=new ArrayList<>();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
