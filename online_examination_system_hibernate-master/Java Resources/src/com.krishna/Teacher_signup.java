@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-
+@Entity
+@Chachable
+@Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Teacher_signup extends HttpServlet 
 {
 	@id
