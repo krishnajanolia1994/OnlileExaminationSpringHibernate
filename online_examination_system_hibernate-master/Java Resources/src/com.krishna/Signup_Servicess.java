@@ -44,6 +44,10 @@ public class Signup_Servicess {
 		{
 			k=1;
 			Teacher_signup ts=new Teacher_signup();
+			ts.first_name= First_nam;
+			ts.last_name=Last_name;
+			ts.email_eddress=email_adress;
+			ts.password=password;
 			Transection tc=hibernet_session.biginTransection();
 			hibernet_session.save(ts);
 			tc.comit();
