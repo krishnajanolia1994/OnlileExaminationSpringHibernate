@@ -19,7 +19,10 @@ public class Signup_Servicess {
 	public int sevicess(HttpServletRequest req, HttpServletResponse res, String Table_name)
 			throws ClassNotFoundException, SQLException, IOException
 	{
-		Class.forName("com.mysql.jdbc.Driver");
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
 
 		int k=1;
 		PrintWriter pr=res.getWriter();
@@ -27,49 +30,21 @@ public class Signup_Servicess {
 		String Last_name=req.getParameter("Last_Name");
 		String email_adress=req.getParameter("Email_Address");
 		String password=req.getParameter("password");
-		String Quary1="select Email_Address From  "+ Table_name +" Where Email_Address = "+ "'"+email_adress+"'";
-		String Quary2="select Password From  "+ Table_name +" Where Password  =' "+password+"'";
-		String Quary3="insert into "+Table_name+"( Last_Name,Email_Address,Password,First_Name) values(?,?,?,?)";
-		String Erroe="";
-		Connection con=(Connection) DriverManager.getConnection("jdbc:mysql:"
-				+ "//localhost:3306/online_examination_syatem", "root","");
-		Statement st=(Statement) con.createStatement();
-		ResultSet rs=st.executeQuery(Quary1);
+		Quary q=hibernet_session.createQuary("select  teacher_id from Teacher_signup where email_eddress= :address and password :pass");
+		q.setParameter("address",email_adress);
+		q.setParameter("pass",password);
+		Integer id=(Integer) q.uniqueResult();
 		HttpSession session= req.getSession();
-
-		if(rs.next())
+		if(id!=null)
 		{
-			session.setAttribute("Error", "ivalid email Adress");
-			pr.println("hi");
+			session.setAttribute("Error", "ivalid email Adress or password");
 			k=0;
 		}
 		else
 		{
-			rs=st.executeQuery(Quary2);
-			if(rs.next())
-			{
-				pr.println("hi");
-
-				session.setAttribute("Error", "invalid Password");
-				k=0;
-			}
-			else
-			{
-				PreparedStatement pst=(PreparedStatement) con.prepareStatement(Quary3);
-				pst.setString(1,Last_name);
-				pst.setString(2,email_adress);
-				pst.setString(3,password);
-				pst.setString(4,First_name);
-				if(k==1)
-					pst.executeUpdate();
-
-				pst.close();
-				session.setAttribute("Error","");
-				
-			}
-			st.close();
-			rs.close();
+			k=1;
 		}
+		
 
 		return k;
 	}
