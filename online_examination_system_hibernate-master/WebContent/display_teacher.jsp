@@ -27,7 +27,7 @@
 	<!-- Preloader -->
 	<div>
 	<%
-		if(session.getAttribute("email")==null)
+		if(session.getAttribute("teacher_password")==null)
 		{
 			session.setAttribute("teacher_login_error", "login_eail");
 			response.sendRedirect("index2.jsp");
