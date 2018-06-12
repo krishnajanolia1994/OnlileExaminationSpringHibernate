@@ -43,6 +43,10 @@ public class Signup_Servicess {
 		else
 		{
 			k=1;
+			Teacher_signup ts=new Teacher_signup();
+			Transection tc=hibernet_session.biginTransection();
+			hibernet_session.save(ts);
+			tc.comit();
 		}
 		
 
