@@ -68,6 +68,7 @@ public class Add_test extends HttpServlet
 			
 		}
 		tx.comit();
+		se.setAtribute("test_name",test_name);
 		res.sendRedirect("add_question.jsp");
 		
 	}
