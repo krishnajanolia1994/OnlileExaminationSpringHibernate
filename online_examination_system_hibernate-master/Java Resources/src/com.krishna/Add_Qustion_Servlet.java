@@ -42,7 +42,7 @@ public class Add_Qustion_Servlet extends HttpServlet
 		int Answer=Integer.parseInt(req.getParameter("Answer"));
 		HttpSession se=req.getSession();
 		String test=se.getAtribute("test_name");
-		Configuration con=new Configuration().Configure().addAnnotatedClass(Add_test.class);
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Add_test.class).addAnnotatedClass(Add_Qustion_Servlet.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
@@ -60,6 +60,8 @@ public class Add_Qustion_Servlet extends HttpServlet
 		option_4=op4;
 		answer=Answer;
 		question_list.add(new_question);
+		hibernet_session.save(test_object);
+		tx.comit();
 		add_all_Question ad=new add_all_Question();
 		ad.get(req, res);
 	
