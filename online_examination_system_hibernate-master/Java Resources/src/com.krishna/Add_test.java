@@ -30,7 +30,7 @@ public class Add_test extends HttpServlet
 	@ManyToOne
 	Add_subject subject;
 	@OneToMany
-	ArrayList<> question_list =new ArrayList<>();
+	ArrayList<Add_Qustion_Servlet> question_list =new ArrayList<Add_Qustion_Servlet>();
     
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
