@@ -13,52 +13,53 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-
-public class Student_signup extends HttpServlet {
+@Entity
+@Chachable
+@Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
+public class Student_signup extends HttpServlet 
+{
+	@Id
+	int student_id;
+	String first_name;
+	String last_Name;
+	String email_address;
+	String password;
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
+		String fname=req.getParameter("First_name");
+		String lname=req.getParameter("Last_Name");
+		String add=req.getParameter("Email_Address");
+		String pass=req.getParameter("password");
 		HttpSession se=req.getSession();
 		String login_table="student_login_table";
-		Signup_Servicess service=new Signup_Servicess();
-		int redirect;
-		try {
-			redirect=service.sevicess(req,res,login_table);
-			if(redirect==1)
-			{
-				String email=req.getParameter("Email_Address");
-				String temp1,temp2;
-				int index=email.indexOf("@");
-				temp1=email.substring(0, index);
-				temp2=email.substring(index+1, email.length()-1);
-				email=temp1+temp2;
-				se.setAttribute("email_of_student",email);
-
-				String str="CREATE TABLE  "+email+"(  result_id int AUTO_INCREMENT , "
-						+ " test_name  varchar(40), maximum_marks int , marks_obtsin int ,PRIMARY KEY(result_id))";
-				Connection con=null;
-				Statement st=null;
-				con=(Connection) DriverManager.getConnection("jdbc:mysql:"
-						+ "//localhost:3306/online_examination_syatem", "root", "");
-				st=(Statement) con.createStatement();
-				st.execute(str);
-				con.close();
-				st.close();
-				res.sendRedirect("display.jsp");
-			}
-			else
-			{
-				res.sendRedirect("index.html");
-			}
-		} catch (ClassNotFoundException e) 
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Quary q=hibernet_session.createQuary("select student_id form student_signup where password = : psaa or email_address= :add");
+		q.setParameter("pass",pass);
+		q.setParameter("add",add);
+		Integer id=q.uniqueResult();
+		if(id!=null)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			res.sendRedirect("index1.jsp");
 		}
+		else
+		{
+			Student_signup new_sttuden=new Student_signup ();
+			new_sttuden.first_name=fname;
+			new_sttuden.last_name=lname;
+			new_sttuden.email_address=add;
+			new_sttuden.password=pass;
+			Transection tx=hibernet_session.biginTransection();
+			hibernet_session.save(new_student);
+			tx.comit();
+			se.setAttribute("student_password", pass);
+			res.sendRedirect("display.jsp");
+			
+		}
+		
 		
 		
 	}
