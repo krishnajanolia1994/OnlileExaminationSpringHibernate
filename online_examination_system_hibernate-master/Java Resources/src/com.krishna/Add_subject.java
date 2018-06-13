@@ -20,10 +20,11 @@ import com.mysql.jdbc.Statement;
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Add_subject extends HttpServlet
 {
+	int subject_id;
 	String subject;
 	@ManyToOne
 	Teacher_signup ts=new Teacher_signup ();
-	@OneToMany(MappedBy="")
+	@OneToMany(MappedBy="subject")
 	ArrayList<Add_test> test_list =new ArrayList<>();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
