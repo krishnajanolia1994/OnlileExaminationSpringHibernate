@@ -31,7 +31,7 @@ public class Add_subject extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
 		HttpSession se=(HttpSession) req.getSession();
-		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class);
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
@@ -56,6 +56,7 @@ public class Add_subject extends HttpServlet
 			session.setAttribute("subject",subject_name);
 			
 		}
+		hibernet.session.save(ts);
 		tx.comit();
 		res.sendRedirect("add_testT.jsp");
 			
