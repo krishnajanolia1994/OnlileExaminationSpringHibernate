@@ -35,7 +35,7 @@ public class Add_subject extends HttpServlet
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
-		Quary q=hibernet_session.createQuary("select teacher_id form Teacher_signup where password = : psaa");
+		Quary q=hibernet_session.createQuary("select teacher_id form Teacher_signup where password = : psaa")  ;
 		HttpSession session=req.getSession();
 		String pass=(String)session.getAtribute("teacher_password");
 		q.setParameter("pass",pass);
