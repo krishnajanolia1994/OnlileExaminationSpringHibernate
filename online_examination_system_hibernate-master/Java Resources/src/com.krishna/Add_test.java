@@ -43,7 +43,7 @@ public class Add_test extends HttpServlet
 		int num_min=Integer.parseInt(req.getParameter("minute"));
 		String Subject=(String) se.getAttribute("subject");
 		pr.println(Subject);
-		Configuration con=new Configuration().Configure().addAnnotatedClass(Add_subject.class);
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Add_subject.class).addAnnotatedClass(Add_test.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
@@ -68,6 +68,7 @@ public class Add_test extends HttpServlet
 			test_list.add(new_test);
 			
 		}
+		hibernet_session.save(add_sub);
 		tx.comit();
 		se.setAtribute("test_name",test_name);
 		res.sendRedirect("add_question.jsp");
