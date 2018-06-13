@@ -5,27 +5,6 @@ import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
