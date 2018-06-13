@@ -21,30 +21,30 @@ public class Create_Subject_Koocki extends HttpServlet
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		{
 			HttpSession se=request.getSession();
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_examination_syatem","root","");
-				Statement st=(Statement) con.createStatement();
-				String table=se.getAttribute("email")+"_subject_main_table";
-				ResultSet rs=st.executeQuery("select Subject_Name from  "+table);
-				int i=0;
-				while(rs.next())
-				{
-					Cookie cookie=new Cookie(""+i,rs.getString("Subject_Name"));
-					response.addCookie(cookie);
-					cookie.setMaxAge(0);
-					se.setAttribute(i+"subject", rs.getString("Subject_Name"));
-					
-					i++;
-				}
-				se.setAttribute("avable_subject_number", i);
-				int k=(Integer) se.getAttribute("avable_subject_number");
-				response.sendRedirect("available_subject.jsp");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			String password =se.getAtribute("teacher_password");
+			
+			Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class);
+			ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+			SessioFactory sf=con.BuildSessionFactory(sr);
+			Session hibernet_session=sf.openSeeion();
+			Quary q=hibernet_session.createQuary("select teacher_id from Teacher_signup where password = :pass");
+			q.setParameter("pass".password);
+			Integer id=q.uniqueResult();
+			Transection tx=hibernet_session.biginTransection();
+			Teacher_signup teacher_signup=hibernet_session.get(Teacher_signup.class,id);
+			ArrayList<Add_subject> subject_list =Teacher_signup.subject_list;
+			int i=0;
+			for(Add_subject subject_obj : subject_list)
+			{
+				se.setAttribute(i+"subject",subject_obj.subject);
+				i++;
 			}
+			int i=0;
+			
+			se.setAttribute("avable_subject_number", i);
+			int k=(Integer) se.getAttribute("avable_subject_number");
+			response.sendRedirect("available_subject.jsp");
+			
 		}
 
 }
