@@ -20,6 +20,7 @@ import com.mysql.jdbc.Statement;
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Add_subject extends HttpServlet
 {
+	@Id
 	int subject_id;
 	String subject;
 	@ManyToOne
