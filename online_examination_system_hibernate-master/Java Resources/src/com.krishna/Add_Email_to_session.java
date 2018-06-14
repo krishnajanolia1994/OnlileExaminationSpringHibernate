@@ -13,13 +13,9 @@ public class Add_Email_to_session extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String Email_Eddress=req.getParameter("Email_Eddress");
-		String temp1,temp2;
-		int index=Email_Eddress.indexOf("@");
-		temp1=Email_Eddress.substring(0, index);
-		temp2=Email_Eddress.substring(index+1, Email_Eddress.length()-1);
-		Email_Eddress=temp1+temp2;
+		
 		HttpSession session=req.getSession();
-		session.setAttribute("Email_Eddress_Table",Email_Eddress);
+		session.setAttribute("teachet_email",Email_Eddress);
 		res.sendRedirect("create_Avalable_subject_for_student.jsp");
 	}
 
