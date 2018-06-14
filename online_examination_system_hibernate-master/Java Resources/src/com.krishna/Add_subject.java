@@ -31,7 +31,7 @@ public class Add_subject extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
 		HttpSession se=(HttpSession) req.getSession();
-		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class).addAnnotatedClass(Id.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
@@ -44,18 +44,18 @@ public class Add_subject extends HttpServlet
 		Teacher_signup ts=hibernet_session.get(Teacher_signup,id);
 		ArraList<Add_subject> suject_list=ts.subject_list;
 		String subject=req.getParameter("subject_name");
-		if(subject_list.contains(subject_name))
+		for(Add_subject obj: subject_list)
 		{
-			se.setAttribute("subject_exist_error","given subject is Alraidy Exist ");
-			res.sendRedirect("add_subjectT.jsp");
+			if(obj.subject.equals(subject_name))
+			{
+				se.setAttribute("subject_exist_error","given subject is Alraidy Exist ");
+				res.sendRedirect("add_subjectT.jsp");
+			}
 		}
-		
-		else
-		{
-			subject_list.add(subject_name);
-			session.setAttribute("subject",subject_name);
-			
-		}
+		Add_subject new_subject = new Add_subject();
+		new_subject.subject=subject_name;
+		Id id=hibernet_session.get(Id.class,1000);
+		id.
 		hibernet.session.save(ts);
 		tx.comit();
 		res.sendRedirect("add_testT.jsp");
