@@ -19,7 +19,7 @@ public class Create_Available_Subject_For_Student extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
-		HttpSession se=req.getSession();
+		HttpSession se=req.getSession() ;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con1=null;
