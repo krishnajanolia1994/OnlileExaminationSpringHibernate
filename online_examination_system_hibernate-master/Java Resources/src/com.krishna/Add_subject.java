@@ -60,6 +60,7 @@ public class Add_subject extends HttpServlet
 		id.subject_id++;
 		hibernet_session.save(id);
 		hibernet.session.save(ts);
+		se.setAttribute("subject_id",subject_id);
 		tx.comit();
 		res.sendRedirect("add_testT.jsp");
 			
