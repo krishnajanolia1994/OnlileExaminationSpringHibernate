@@ -22,44 +22,22 @@ public class Create_Email extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		HttpSession se=request.getSession();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con1=null;
-			try 
-			{
-				con1 = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_examination_syatem","root","");
-				Statement st=(Statement) con1.createStatement();
-				ResultSet rs=st.executeQuery("select Email_Address from  teacher_login_table");
-				int i=0;
-				while(rs.next())
-				{
-					
-					se.setAttribute(i+"Email_of_teacher", rs.getString("Email_Address"));
-					
-					i++;
-				}
-				se.setAttribute("avable_Email_number", i);
-				response.sendRedirect("available_teacher_email.jsp");
-			} 
-			catch (SQLException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			finally
-			{
-				try {
-					con1.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Quary q=hibernet_session.createQuary("select email_address form Teacher_signup");
+		ArryaList<String> email_list=(String)q.list();
+		int i=0;
+		for(String str : email_list)
+		{
+			se.setAttribute(i+"Email_of_teacher", str);
+			i++;
 		}
+		
+		se.setAttribute("avable_Email_number", i);
+		response.sendRedirect("available_teacher_email.jsp");
+			
 		
 	}
 
