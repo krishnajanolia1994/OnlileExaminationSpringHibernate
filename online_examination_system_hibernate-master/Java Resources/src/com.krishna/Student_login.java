@@ -18,35 +18,25 @@ public class Student_login extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
-		int redirect ;
-		PrintWriter pr=res.getWriter();
-		Singin_servicess serv =new Singin_servicess();
-		try {
-			redirect=serv.sevice(req,res,"student_login_table");
-			if(redirect==1)
-			{
-				String email=req.getParameter("Email_Address");
-				HttpSession se=req.getSession();
-				String temp1,temp2;
-				int index=email.indexOf("@");
-				temp1=email.substring(0, index);
-				temp2=email.substring(index+1, email.length()-1);
-				email=temp1+temp2;
-				se.setAttribute("email_of_student", email);
-				res.sendRedirect("display.jsp");
-			}
-			else
-			{
-				pr.println(redirect);
-				//res.sendRedirect("index1.jsp");
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		HttpSession se=(HttpSession) req.getSession();
+		String add=req.getPerameter("Email_Address");
+		String pass=req.getPerameter("password");
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Student_login.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Quary q=hibernet_session.createQuary("select teacher_id form Teacher_signup where email_address=:add password = : pass");
+		q.setParameter("add":add);
+		q.setParameter("pass",pass);
+		if(id!=null)
+		{
+			se.setAttribute("student_password", pass);
+			res.sendRedirect("display.jsp");
 		}
+		else
+			res.sendRedirect("index1_login.jsp");
+
 	}
 
 }
