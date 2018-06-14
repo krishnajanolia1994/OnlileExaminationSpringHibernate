@@ -56,14 +56,14 @@ public class Add_test extends HttpServlet
 			if(test_obj.test_name.equals(test_name))
 				res.sendRedirect("add_testT.jsp");
 		}
-		Id id=hibernet_session.get(Id.class,1000);
+		Id id_obj=hibernet_session.get(Id.class,1000);
 		Add_test new_test =new Add_test();
 		 new_test.test_name=test_name();
 		 new_test.number_question=number_question;
 		 new_test.num_hour=num_hour;
 		 new_test.num_min=num_min;
-		 new_test.test_id=id.test_id;
-		 id.test_id++;
+		 new_test.test_id=id_obj.test_id;
+		 id_obj.test_id++;
 		 test_list.add(new_test);
 		 hibernet_session.save(subject_obj);
 		 hibernet_session.save(id);
