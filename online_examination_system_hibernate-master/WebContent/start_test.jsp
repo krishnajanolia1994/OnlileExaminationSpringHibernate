@@ -132,16 +132,16 @@ footer{
   	
   	<h4><%= session.getAttribute(q+"Question") %></h4>
     <div class="radio"> 
-      <label><input type="radio" name=<%=q+"Question" %>  value="<%= session.getAttribute(o1+"OptionI") %>"><%= session.getAttribute(o1+"OptionI") %> </label>
+      <label><input type="radio" name=<%=q+"Question" %>  value="<%= o1 %>"><%= session.getAttribute(o1+"OptionI") %> </label>
     </div>
     <div class="radio">
-      <label><input type="radio" name=<%=q+"Question" %>  value="<%= session.getAttribute(o2+"OptionII") %>"><%= session.getAttribute(o2+"OptionII") %> </label>
+      <label><input type="radio" name=<%=q+"Question" %>  value="<%= o2 %>"><%= session.getAttribute(o2+"OptionII") %> </label>
     </div>
     <div class="radio">
-      <label><input type="radio" name=<%=q+"Question" %>  value="<%= session.getAttribute(o3+"OptionIII") %>"><%= session.getAttribute(o3+"OptionIII") %> </label>
+      <label><input type="radio" name=<%=q+"Question" %>  value="<%= o3 %>"><%= session.getAttribute(o3+"OptionIII") %> </label>
     </div>
     <div class="radio">
-      <label><input type="radio" name=<%=q+"Question" %> value="<%= session.getAttribute(o4+"OptionIV") %>"><%= session.getAttribute(o4+"OptionIV") %> </label>
+      <label><input type="radio" name=<%=q+"Question" %> value="<%= o4 %>"><%= session.getAttribute(o4+"OptionIV") %> </label>
     </div><br>
     
     <% } %>
