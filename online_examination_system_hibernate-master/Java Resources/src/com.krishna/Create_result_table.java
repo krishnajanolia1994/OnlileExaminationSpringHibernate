@@ -20,38 +20,28 @@ public class Create_result_table extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
 		HttpSession se=req.getSession();
-		String table=(String) se.getAttribute("email_of_student");
-		try 
+		String password=(String) se.getAttribute("student_password");
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Quary q=hibernet_session.createQquary("select student_id from Student_signup  where password =:pass");
+		q.setParameter("pass",password);
+		long id=q.uniqueResult();
+		Student_signup  std_obj=hibernet_session.get(Student_signup .class,id);
+		ArrayList<Result_servise> result_list =std_obj.result_list;
+		int i=0;
+		for(Result_servise result:result_list)
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con;
-			try {
-				con = (Connection) DriverManager.getConnection("jdbc:mysql:"
-						+ "//localhost:3306/online_examination_syatem","root","");
-				Statement st=(Statement) con.createStatement();
-				ResultSet rs=st.executeQuery("select test_name , maximum_marks , marks_obtsin from  "+table);
-				int i=0;
-				while(rs.next())
-				{
-					
-					se.setAttribute(i+"test_name_tab", rs.getString("test_name"));
-					se.setAttribute(i+"max_mark", rs.getInt("maximum_marks"));
-					se.setAttribute(i+"marks_obtain", rs.getInt("marks_obtsin"));
-					
-					i++;
-				}
-				se.setAttribute("avable_test_number", i);
-				res.sendRedirect("final_result_table.jsp");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			se.setAttribute(i+"test_name_tab",result.test_name);
+			se.setAttribute(i+"max_mark", result.total_marks);
+			se.setAttribute(i+"marks_obtain", result.marks_obtain);
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			i++;
 		}
+		
+		se.setAttribute("avable_test_number", i);		
+		res.sendRedirect("final_result_table.jsp");
 		
 	}
 
