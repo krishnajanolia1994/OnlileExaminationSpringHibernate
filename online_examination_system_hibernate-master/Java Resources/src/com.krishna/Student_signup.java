@@ -24,6 +24,8 @@ public class Student_signup extends HttpServlet
 	String last_Name;
 	String email_address;
 	String password;
+	@ManyToOne(MappedBy="stud")
+	ArrayList<Result_servise> test_list=new ArryaList<Result_servise>();
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
