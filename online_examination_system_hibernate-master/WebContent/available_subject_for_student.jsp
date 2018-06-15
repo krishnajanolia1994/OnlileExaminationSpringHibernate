@@ -121,7 +121,7 @@ footer
   	
   	
     <div class="radio">
-      <label><input type="radio" name="subject_name" value="<%= (Add_subject)session.getAttribute(j+"Avalable_Subject").teacher_id %>"><%= (Add_subject)session.getAttribute(j+"Avalable_Subject").subject %> </label>
+      <label><input type="radio" name="subject_id" value="<%= (Add_subject)session.getAttribute(j+"Avalable_Subject").teacher_id %>"><%= (Add_subject)session.getAttribute(j+"Avalable_Subject").subject %> </label>
     </div>
     <% } %>
    	<div class=radio>
