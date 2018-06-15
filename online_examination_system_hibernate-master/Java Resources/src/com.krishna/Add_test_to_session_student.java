@@ -11,9 +11,10 @@ import javax.servlet.http.HttpSession;
 public class Add_test_to_session_student extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String test_name=req.getParameter("test_name_student");
+		String test_id=req.getParameter("test_id");
 		HttpSession session=req.getSession();
-		session.setAttribute("test_table",test_name);
+		Long id=Long.ParseLong(test_id);
+		session.setAttribute("test_id",id);
 		res.sendRedirect("create_question_paper.jsp");
 	}
 
