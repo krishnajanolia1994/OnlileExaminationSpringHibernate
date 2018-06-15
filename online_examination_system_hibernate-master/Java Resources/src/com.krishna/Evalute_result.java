@@ -52,6 +52,7 @@ public class Evalute_result extends HttpServlet
 		}
 		se.setAttribute("total_marks", total_marks);
 		se.setAttribute("marks_obtain", marks_obtain);
+		se.setAttribute("test_name");
 		Result_servise servise=new Result_servise();
 		servise.servise(req, res);
 	}
