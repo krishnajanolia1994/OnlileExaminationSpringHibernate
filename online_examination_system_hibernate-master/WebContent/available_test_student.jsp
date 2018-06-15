@@ -118,7 +118,7 @@ footer{
   	
   	
     <div class="radio">
-      <label><input type="radio" name="test_name_student" value="<%= session.getAttribute(j+"test_Available") %>"><%= session.getAttribute(j+"test_Available") %> </label>
+      <label><input type="radio" name="test_id" value="<%= (Add_test)session.getAttribute(j+"test_Available").test_id %>"><%= (Add_test)session.getAttribute(j+"test_Available")test_name %> </label>
     </div>
     <% } %>
    	<div class=radio>
