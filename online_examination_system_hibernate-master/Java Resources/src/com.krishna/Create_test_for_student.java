@@ -21,35 +21,22 @@ public class Create_test_for_student extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
 		HttpSession se=req.getSession();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			try {
-				 Connection con = (Connection) DriverManager.getConnection("jdbc:mysql:"
-						+ "//localhost:3306/online_examination_syatem","root","");
-				Statement st=(Statement) con.createStatement();
-				String table=(String) se.getAttribute("subject_table");
-				ResultSet rs=st.executeQuery("select Test_Name from  "+se.getAttribute("Email_Eddress_Table")+table);
-				int i=0;
-				while(rs.next())
-				{
-					
-					se.setAttribute(i+"test_Available", rs.getString("Test_Name"));
-					
-					i++;
-				}
-				se.setAttribute("avable_test", i);
-				res.sendRedirect("available_test_student.jsp");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class).addAnnotatedClass(Id.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Long subject_id=se.getAttribute("subject_id");
+		Add_subjet add_subject =hibernet_session.get(Add_subject.class,subject_id);
+		ArrayList <Add_test> test_list=add_subject.test_list;
+		int i=0;
+		for(Add_test test_obj : test_list)
+		{
+			se.setAttribute(i+"test_Available", test_obj);
+			i++;	
 		}
 		
+		se.setAttribute("avable_test", i);
+		res.sendRedirect("available_test_student.jsp");
 	
 	}
 
