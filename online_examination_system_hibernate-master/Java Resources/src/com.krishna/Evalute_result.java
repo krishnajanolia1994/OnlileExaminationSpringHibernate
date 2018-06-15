@@ -22,65 +22,38 @@ public class Evalute_result extends HttpServlet
 	{
 		HttpSession se=req.getSession();
 		int num_que_op=(Integer) se.getAttribute("avable_question_option");
-		String Subject=(String) se.getAttribute("subject_table");
-		String test=(String) se.getAttribute("test_table");
-		String email=(String) se.getAttribute("Email_Eddress_Table");
-		String table=email+Subject+test;
-		try 
+		
+
+		
+		int i=0;
+		PrintWriter pr=res.getWriter();
+		
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class).addAnnotatedClass(Id.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		long test_id=(Long) se.getAttribute("test_id");
+		Add_test add_test=hibernet_session.get(Add.test.classw,test_id);
+		ArratList<Add_Qustion_Servlet> question_list=Add_test.question_list;
+		
+		int ans_obtain;
+		int right_index;
+		String Correct_answer;
+		int total_marks=0;
+		int marks_obtain=0;
+		for(Add_Qustion_Servlet question_obj: question_list)
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con1=null;
-			
-			try {
-				con1 = (Connection) DriverManager.getConnection("jdbc:mysql:"
-						+ "//localhost:3306/online_examination_syatem","root","");
-				Statement st=(Statement) con1.createStatement();
-				ResultSet rs=st.executeQuery("select OptionI , OptionII, OptionIII , OptionIV , Answer  from  "+table);
-				int i=0;
-				PrintWriter pr=res.getWriter();
-				pr.println(email);
-				pr.println(Subject);
-				pr.println(test);
-				String ans_obtain;
-				int right_index;
-				String Correct_answer;
-				int total_marks=0;
-				int marks_obtain=0;
-				while(rs.next())
-				{
-					ans_obtain= req.getParameter(i+"Question");
-					right_index=rs.getInt("Answer");
-					
-					Correct_answer=rs.getString(right_index);
-					pr.println(ans_obtain);
-					pr.println(right_index);
-					pr.println(Correct_answer);
-					if(ans_obtain!=null)
-						if(ans_obtain.equals(Correct_answer))
-						{
-							marks_obtain++;
-						}
-					total_marks++;
-					i+=5;
-					
-					
-				}
-				se.setAttribute("total_marks", total_marks);
-				se.setAttribute("marks_obtain", marks_obtain);
-				Result_servise servise=new Result_servise();
-				servise.servise(req, res);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ans_obtain= Integer.parseInt(req.getParameter(i+"Question"));
+			right_index=question_qbj.answer;
+			if(ans_obtain==right_index)
+				marks_obtain++;
+			total_marks++;
+			i+=5;
 		}
-			
-		
-		
+		se.setAttribute("total_marks", total_marks);
+		se.setAttribute("marks_obtain", marks_obtain);
+		Result_servise servise=new Result_servise();
+		servise.servise(req, res);
 	}
 
 }
