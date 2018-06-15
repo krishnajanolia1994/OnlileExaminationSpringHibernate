@@ -23,41 +23,30 @@ public class Create_question_paper extends HttpServlet {
 		HttpSession se=req.getSession();
 		String Subject=(String) se.getAttribute("subject_table");
 		String test=(String) se.getAttribute("test_table");
-		String Table=Subject+test;
 		int i=0;
-		Connection con1=null;
-		try {
-			con1 = (Connection) DriverManager.getConnection("jdbc:mysql:"
-					+ "//localhost:3306/online_examination_syatem","root","");
-			Statement st=(Statement) con1.createStatement();
-			ResultSet rs=st.executeQuery("select Question , OptionI ,OptionII ,OptionIII ,OptionIV   from  "
-			+se.getAttribute("Email_Eddress_Table")+Table);
-			while(rs.next())
-			{
-				
-				se.setAttribute(i+"Question", rs.getString("Question"));
-				se.setAttribute(i+1+"OptionI", rs.getString("OptionI"));
-				se.setAttribute(i+2+"OptionII", rs.getString("OptionII"));
-				se.setAttribute(i+3+"OptionIII", rs.getString("OptionIII"));
-				se.setAttribute(i+4+"OptionIV", rs.getString("OptionIV"));
-				i+=5;
-			}
-			Table=se.getAttribute("Email_Eddress_Table")+Subject;
-			PrintWriter pr=res.getWriter();
-			pr.println(Table);
-			rs=st.executeQuery("select hour , minute from  "+Table+"  where Test_Name =  '"+test+"'");
-			rs.next();
-			int hour= rs.getInt("hour");
-			int minut=rs.getInt("minute");
-			int time_in_sec=hour*3600 + minut*60;
-			se.setAttribute("time_in_sec", time_in_sec);
-			se.setAttribute("avable_question_option", i);
-			res.sendRedirect("start_test.jsp");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class).addAnnotatedClass(Id.class);
+		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
+		SessioFactory sf=con.BuildSessionFactory(sr);
+		Session hibernet_session=sf.openSeeion();
+		Long id=(Long)se.getAttribute("test_id");
+		Add_test add_test = hibernet_session.get(Add_test.class,id);
+		ArrayList<Add_Qustion_Servlet> question_list=add_test.question_list;
+		for(Add_Qustion_Servlet question_obj : question_list)
+		{
+			se.setAttribute(i+"Question",question_obj.Question );
+			se.setAttribute(i+1+"OptionI", question_obj.option_1);
+			se.setAttribute(i+2+"OptionII", question_obj.option_2);
+			se.setAttribute(i+3+"OptionIII", question_obj.option_3);
+			se.setAttribute(i+4+"OptionIV", question_obj.option_4);
+			i+=5;
 		}
-		
+		int hour= add_test.num_hour;
+		int minut=add_test.num_min;
+		int time_in_sec=hour*3600 + minut*60;
+		se.setAttribute("time_in_sec", time_in_sec);
+		se.setAttribute("avable_question_option", i);
+		res.sendRedirect("start_test.jsp");
+
 			
 	}
 
