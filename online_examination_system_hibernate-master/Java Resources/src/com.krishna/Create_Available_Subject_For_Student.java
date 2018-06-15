@@ -32,13 +32,12 @@ public class Create_Available_Subject_For_Student extends HttpServlet {
 		ArrayList<Add_subject> subject_list =teacher_signpu.subject_list;
 		int i=0;
 		for(Add_subject subject_obj : subject_list)
-		while(rs.next())
 		{
-
 			se.setAttribute(i+"Avalable_Subject", subject_obj);
 
 			i++;
 		}
+		
 		se.setAttribute("avable_subject_number", i);
 		res.sendRedirect("available_subject_for_student.jsp");
 			
