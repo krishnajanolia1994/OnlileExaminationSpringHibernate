@@ -1,18 +1,18 @@
 package com.krishna;
 
-import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+javax.persitence.Cacheable;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+
 
 
 public class Create_result_table extends HttpServlet {
