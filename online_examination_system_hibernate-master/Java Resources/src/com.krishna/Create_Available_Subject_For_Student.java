@@ -10,7 +10,7 @@ import org.hibernet.SessionFactory;
 import org.hibernet.cfg.Configuration;
 import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
-
+javax.persitence.Cacheable;
 
 public class Create_Available_Subject_For_Student extends HttpServlet {
 	
