@@ -1,19 +1,23 @@
 package com.krishna;a
-
-import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.Transection;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+//entity
+javax.persitence.Entity;
+javax.persitence.Id;
+//maping
+javax.persitence.OneToMany;
+javax.persitence.ManyToOne;
+javax.persitence.Cacheable;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 
 @Entity
 @Chachable
