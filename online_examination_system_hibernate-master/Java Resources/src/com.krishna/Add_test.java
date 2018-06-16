@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernet.Session;
 import org.hibernet.SessionFactory;
 import org.hibernet.cfg.Configuration;
-import org.hibernet.Transection;
+import org.hibernet.Transaction;
 import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
 //entity
@@ -50,7 +50,7 @@ public class Add_test extends HttpServlet
 		SessioFactory sf=con.BuildSessionFactory(sr);
 		Session hibernet_session=sf.openSeeion();
 		Long id=(Long)se.getAttribute("subject_id");
-		Transection tx=hibernet_session.biginTransection();
+		Transaction tx=hibernet_session.biginTransection();
 		Add_subject subject_obj=hibernet_session.get(Add_subject.class,id);
 		ArrayList<Add_test> test_list=subject_obj.test_list;
 		for(Add_test test_obj:test_list)
