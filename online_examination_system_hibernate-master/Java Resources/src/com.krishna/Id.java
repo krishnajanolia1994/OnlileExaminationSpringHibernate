@@ -1,3 +1,9 @@
+//entity
+javax.persitence.Entity;
+javax.persitence.Id;
+javax.persitence.Cacheable;
+
+
 @Entity
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
