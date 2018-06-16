@@ -1,20 +1,22 @@
 package com.krishna;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
-
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.Transection;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+//entity
+javax.persitence.Entity;
+javax.persitence.Id;
+//maping
+javax.persitence.OneToMany;
+javax.persitence.ManyToOne;
+javax.persitence.Cacheable;
 @Entity
 @Chacheble
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
@@ -33,7 +35,6 @@ public class Add_Qustion_Servlet extends HttpServlet
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
-		PrintWriter pr=res.getWriter();
 		String Question=req.getParameter("question");
 		String op1=req.getParameter("option_1");
 		String op2=req.getParameter("option_2");
