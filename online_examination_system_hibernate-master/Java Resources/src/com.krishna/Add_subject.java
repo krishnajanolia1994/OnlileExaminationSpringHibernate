@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernet.Session;
 import org.hibernet.SessionFactory;
 import org.hibernet.cfg.Configuration;
-import org.hibernet.Transection;
+import org.hibernet.Transaction;
 import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
 //entity
@@ -44,7 +44,7 @@ public class Add_subject extends HttpServlet
 		String pass=(String)session.getAtribute("teacher_password");
 		q.setParameter("pass",pass);
 		Integer id=(Integer) q.uniqueResult();
-		Transection tx=hibernet_session.biginTransection();
+		Transaction tx=hibernet_session.biginTransection();
 		Teacher_signup ts=hibernet_session.get(Teacher_signup,id);
 		ArraList<Add_subject> suject_list=ts.subject_list;
 		String subject=req.getParameter("subject_name");
