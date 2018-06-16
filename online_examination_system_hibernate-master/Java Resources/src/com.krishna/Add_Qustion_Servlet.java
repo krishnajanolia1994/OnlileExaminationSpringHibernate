@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernet.Session;
 import org.hibernet.SessionFactory;
 import org.hibernet.cfg.Configuration;
-import org.hibernet.Transection;
+import org.hibernet.Transaction;
 import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
 //entity
