@@ -58,7 +58,7 @@ public class Add_Qustion_Servlet extends HttpServlet
 	        new_question.option_4=op4;
 		new_question.answer=Answer;
 		question_list.add(new_question);
-		Transection tx=hibernet_session.biginTransection();
+		Transaction tx=hibernet_session.biginTransection();
 		hibernet_session.save(add_test)
 		tx.comit();
 		add_all_Question ad=new add_all_Question();
