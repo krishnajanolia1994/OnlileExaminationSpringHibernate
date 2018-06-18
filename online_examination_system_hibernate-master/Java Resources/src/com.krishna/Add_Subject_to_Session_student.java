@@ -15,7 +15,7 @@ public class Add_test_to_session_student extends HttpServlet {
 		HttpSession session=req.getSession();
 		Long sub_id=Long.paseLong(subject_id);
 		session.setAttribute("test_id",sub_id);
-		res.sendRedirect("create_test_for_student.jsp");
+		res.sendRedirect("create_question_paper.jsp ");
 	}
 
 }
