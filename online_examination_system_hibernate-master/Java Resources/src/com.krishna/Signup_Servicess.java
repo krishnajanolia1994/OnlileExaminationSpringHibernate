@@ -1,17 +1,16 @@
 package com.krishna;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.Transaction;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+import javax.persitence.Cacheable;
 
 public class Signup_Servicess {
 
