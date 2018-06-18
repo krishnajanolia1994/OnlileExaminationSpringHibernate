@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class Teacher_logout extends HttpServlet {
+public class Teacher_logout extends HttpServlet
+{
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		HttpSession se=request.getSession();
-		se.removeAttribute("email");
+		se.removeAttribute("teacher_password");
 		response.sendRedirect("index.html");
 	}
 
