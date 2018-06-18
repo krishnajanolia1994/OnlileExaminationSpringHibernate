@@ -29,7 +29,7 @@
 		if(session.getAttribute("student_password")==null)
 		{
 			session.setAttribute("login_error","please login first");
-			//response.sendRedirect("index1.jsp");
+			response.sendRedirect("index1.jsp");
 		}
 	%>
 	</div>
