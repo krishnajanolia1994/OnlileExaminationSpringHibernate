@@ -82,6 +82,13 @@ footer
 	</style>
 </head>
 <body >
+	<%
+		if(session.getAttribute("student_password")==null)
+		{
+			session.setAttribute("login_error","please login first");
+			response.sendRedirect("index1.jsp");
+		}
+	%>
 
 	<div>
 		 <ul class="nav navbar-nav">
