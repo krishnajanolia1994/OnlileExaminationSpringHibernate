@@ -26,11 +26,11 @@
 	<!-- Preloader -->
 	<div>
 	<%
-		//if(session.getAttribute("user_name")==null)
-		//{
-		//	session.setAttribute("login_error","please login first");
+		if(session.getAttribute("student_password")==null)
+		{
+			session.setAttribute("login_error","please login first");
 			//response.sendRedirect("index1.jsp");
-		//}
+		}
 	%>
 	</div>
 	<div id="preloader">
