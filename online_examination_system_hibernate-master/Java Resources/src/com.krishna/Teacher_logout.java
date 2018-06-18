@@ -14,7 +14,7 @@ public class Teacher_logout extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		HttpSession se=request.getSession();
-		se.removeAttribute("teacher_password");
+		se.removeAttribute("teacher_password ");
 		response.sendRedirect("index.html");
 	}
 
