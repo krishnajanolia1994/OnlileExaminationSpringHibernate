@@ -1,13 +1,17 @@
 package com.krishna;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.Transaction;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+import javax.persitence.Cacheable;
 
 
 public class Teacher_login extends HttpServlet {
