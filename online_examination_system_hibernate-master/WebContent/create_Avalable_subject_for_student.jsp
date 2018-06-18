@@ -22,7 +22,8 @@
 			session.setAttribute("login_error","please login first");
 			response.sendRedirect("index1.jsp");
 		}
-	%
+	%>
+	
   <div class="form">
       
       
