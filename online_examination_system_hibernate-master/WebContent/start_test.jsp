@@ -82,7 +82,14 @@ footer{
 
 </style>
 </head>
-<body>
+<body><%
+		if(session.getAttribute("student_password")==null)
+		{
+			session.setAttribute("login_error","please login first");
+			response.sendRedirect("index1.jsp");
+		}
+	%>
+	/create_question_paper.jsp 
 <%
 	int total_sec=(Integer) session.getAttribute("time_in_sec");
 	int sec=total_sec % 60;
