@@ -10,11 +10,11 @@ import org.hibernet.Transection;
 import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
 //entity
-javax.persitence.Entity;
-javax.persitence.Id;
+import javax.persitence.Entity;
+import  javax.persitence.Id;
 //maping
-javax.persitence.ManyToOne;
-javax.persitence.Cacheable;
+import javax.persitence.ManyToOne;
+import javax.persitence.Cacheable;
 
 
 
