@@ -1,7 +1,7 @@
 //entity
-javax.persitence.Entity;
-javax.persitence.Id;
-javax.persitence.Cacheable;
+import javax.persitence.Entity;
+import javax.persitence.Id;
+import javax.persitence.Cacheable;
 
 
 @Entity
