@@ -17,9 +17,10 @@ import javax.persitence.Id;
 import javax.persitence.OneToMany;
 import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
+
 import Org.springframwork.beans.factory.annotation.Autowired;
 import org.springframwork.context.ApplicationContext;
-Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 
 
 @Entity
