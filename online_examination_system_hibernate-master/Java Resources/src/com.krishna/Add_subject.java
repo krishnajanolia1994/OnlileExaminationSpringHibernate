@@ -67,7 +67,7 @@ public class Add_subject extends HttpServlet
 		new_subject.subject=subject_name;
 		Id id=hibernet_session.get(Id.class,1000);
 		long subject_id=id.subject_id;
-		this.subject_id=subject_id;
+		new_subject.subject_id=subject_id;
 		id.subject_id++;
 		hibernet_session.save(id);
 		hibernet.session.save(ts);
