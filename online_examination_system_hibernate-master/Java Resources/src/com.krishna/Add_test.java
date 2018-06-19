@@ -20,19 +20,8 @@ import javax.persitence.Cacheable;
 
 import Org.springframwork.beans.factory.annotation.Autowired;
 import Org.springframwork.stereotype.Component;
-
-/*import Org.springframwork.beans.factory.annotation.Autowired;
-import Org.springframwork.stereotype.Component;
-
-
 import org.springframwork.context.ApplicationContext;
 import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
-
-ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
-@Autowired
-
-@Component
-*/
 
 @Component
 @Entity
