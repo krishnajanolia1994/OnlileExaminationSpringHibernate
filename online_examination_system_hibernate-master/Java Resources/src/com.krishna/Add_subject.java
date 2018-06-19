@@ -19,27 +19,11 @@ import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 import Org.springframwork.beans.factory.annotation.Autowired;
 import org.springframwork.context.ApplicationContext;
-Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
-
-
-
-
-/*import Org.springframwork.beans.factory.annotation.Autowired;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 import Org.springframwork.stereotype.Component;
 
-
-import org.springframwork.context.ApplicationContext;
-Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
-
-ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
-@Autowired
-import Org.springframwork.stereotype.Component;
 
 @Component
-*/
-
-
-
 @Entity
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
