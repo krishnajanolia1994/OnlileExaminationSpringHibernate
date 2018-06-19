@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Org.springframwork.stereotype.Component;
 
+@Component
 public class add_all_Question {
 	public void get(HttpServletRequest req, HttpServletResponse res) throws IOException
 	{
