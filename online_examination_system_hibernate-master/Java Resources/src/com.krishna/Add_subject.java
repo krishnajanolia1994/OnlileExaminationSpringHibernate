@@ -17,6 +17,27 @@ import javax.persitence.Id;
 import javax.persitence.OneToMany;
 import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
+import Org.springframwork.beans.factory.annotation.Autowired;
+import org.springframwork.context.ApplicationContext;
+Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+
+
+
+
+/*import Org.springframwork.beans.factory.annotation.Autowired;
+import Org.springframwork.stereotype.Component;
+
+
+import org.springframwork.context.ApplicationContext;
+Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+
+ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+@Autowired
+import Org.springframwork.stereotype.Component;
+
+@Component
+*/
+
 
 
 @Entity
@@ -28,12 +49,15 @@ public class Add_subject extends HttpServlet
 	int subject_id;
 	String subject;
 	@ManyToOne
-	Teacher_signup ts=new Teacher_signup ();
+	@Autowired
+	Teacher_signup ts;
 	@OneToMany(MappedBy="subject")
-	ArrayList<Add_test> test_list =new ArrayList<>();
+	@Autowired
+	ArrayList<Add_test> test_list;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		HttpSession se=(HttpSession) req.getSession();
 		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class).addAnnotatedClass(Id.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
@@ -56,7 +80,7 @@ public class Add_subject extends HttpServlet
 				res.sendRedirect("add_subjectT.jsp");
 			}
 		}
-		Add_subject new_subject = new Add_subject();
+		Add_subject new_subject = factory.getBean(add_subject);
 		new_subject.subject=subject_name;
 		Id id=hibernet_session.get(Id.class,1000);
 		long subject_id=id.subject_id;
