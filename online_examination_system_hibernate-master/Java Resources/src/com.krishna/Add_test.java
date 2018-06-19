@@ -18,7 +18,23 @@ import javax.persitence.OneToMany;
 import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 
+import Org.springframwork.beans.factory.annotation.Autowired;
+import Org.springframwork.stereotype.Component;
 
+/*import Org.springframwork.beans.factory.annotation.Autowired;
+import Org.springframwork.stereotype.Component;
+
+
+import org.springframwork.context.ApplicationContext;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+
+ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+@Autowired
+
+@Component
+*/
+
+@Component
 @Entity
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
@@ -31,13 +47,15 @@ public class Add_test extends HttpServlet
 	int num_hour ;
 	int num_min;
 	@ManyToOne
+	@Autowired
 	Add_subject subject;
 	@OneToMany
-	ArrayList<Add_Qustion_Servlet> question_list =new ArrayList<Add_Qustion_Servlet>();
+	@Autowired
+	ArrayList<Add_Qustion_Servlet> question_list;
     
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
-		
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		HttpSession se=req.getSession();
 		String test_name=req.getParameter("test_name");
 		int number_question =Integer.parseInt(req.getParameter("Number_question"));
@@ -59,7 +77,7 @@ public class Add_test extends HttpServlet
 				res.sendRedirect("add_testT.jsp");
 		}
 		Id id_obj=hibernet_session.get(Id.class,1000);
-		Add_test new_test =new Add_test();
+		Add_test new_test =factory.getBean("add_test");
 		 new_test.test_name=test_name();
 		 new_test.number_question=number_question;
 		 new_test.num_hour=num_hour;
