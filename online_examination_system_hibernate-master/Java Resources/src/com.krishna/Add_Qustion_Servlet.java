@@ -17,6 +17,9 @@ import javax.persitence.Id;
 import javax.persitence.OneToMany;
 import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
+import Org.springframwork.beans.factory.annotation.Autowired;
+import org.springframwork.context.ApplicationContext;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 @Entity
 @Chacheble
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
@@ -30,6 +33,7 @@ public class Add_Qustion_Servlet extends HttpServlet
 	String option_3;
 	String option_4;
 	int answer;
+	@Autowired
 	@ManyToOne
 	Add_test add_test;
 	
@@ -61,7 +65,8 @@ public class Add_Qustion_Servlet extends HttpServlet
 		Transaction tx=hibernet_session.biginTransection();
 		hibernet_session.save(add_test)
 		tx.comit();
-		add_all_Question ad=new add_all_Question();
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+		add_all_Question ad=factory.getBean("add_all_question");
 		ad.get(req, res);
 	
 	}
