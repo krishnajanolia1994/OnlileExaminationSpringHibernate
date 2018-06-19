@@ -19,11 +19,9 @@ import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 import Org.springframwork.beans.factory.annotation.Autowired;
 import org.springframwork.context.ApplicationContext;
-import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
-import Org.springframwork.stereotype.Component;
+Import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 
 
-@Component
 @Entity
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
