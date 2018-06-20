@@ -18,6 +18,7 @@ public class Signup_Servicess {
 	public int sevicess(HttpServletRequest req, HttpServletResponse res, String Table_name)
 			throws ClassNotFoundException, SQLException, IOException
 	{
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
@@ -42,7 +43,7 @@ public class Signup_Servicess {
 		else
 		{
 			k=1;
-			Teacher_signup ts=new Teacher_signup();
+			Teacher_signup ts=factory.grtBean("teacher_signup");
 			ts.first_name= First_nam;
 			ts.last_name=Last_name;
 			ts.email_eddress=email_adress;
