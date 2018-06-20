@@ -28,6 +28,7 @@ public class Result_servise
 	public void servise(HttpServletRequest req, HttpServletResponse res)
 	{
 		HttpSession se=req.getSession();
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		String std_password=(String)se.getAttribute("student_password");
 		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
@@ -42,7 +43,7 @@ public class Result_servise
 		int total_marks= Integer.parseInt(se.getAttribute("total_marks"));
 		int marks_obtain= Integer.parseInt(se.getAttribute("marks_obtain"));
 		String test=(String) se.getAttribute("test_name");
-		Result_servise reslt=new Result_servise ();
+		Result_servise reslt=factory.getBean("result_servise");
 		result.test_name=test;
 		rsult.total_marks=total_marks;
 		result.marks_obtain=marks_obtain;
