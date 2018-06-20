@@ -35,7 +35,9 @@ public class Teacher_signup extends HttpServlet
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
-		Signup_Servicess service=new Signup_Servicess();
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+
+		Signup_Servicess service=factory.grtBean("Signup_Servicess");
 
 		String login_table="teacher_login_table";
 		int redirect;
