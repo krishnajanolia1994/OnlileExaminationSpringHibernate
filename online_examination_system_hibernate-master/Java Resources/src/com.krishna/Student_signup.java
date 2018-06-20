@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-
+@Component
 @Entity
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
@@ -35,6 +35,8 @@ public class Student_signup extends HttpServlet
 		String pass=req.getParameter("password");
 		HttpSession se=req.getSession();
 		String login_table="student_login_table";
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+
 		Configuration con=new Configuration().Configure().addAnnotatedClass(Teacher_signup.class).addAnnotatedClass(Add_subject.class);
 		ServiceRegistry sr=new ServiceRegistryBuilder().addApliedSetings(con.getProperties()).BuildServiceRegistry();
 		SessioFactory sf=con.BuildSessionFactory(sr);
@@ -49,7 +51,7 @@ public class Student_signup extends HttpServlet
 		}
 		else
 		{
-			Student_signup new_sttuden=new Student_signup ();
+			Student_signup new_sttuden=factory.getBean("student_signup");
 			new_sttuden.first_name=fname;
 			new_sttuden.last_name=lname;
 			new_sttuden.email_address=add;
