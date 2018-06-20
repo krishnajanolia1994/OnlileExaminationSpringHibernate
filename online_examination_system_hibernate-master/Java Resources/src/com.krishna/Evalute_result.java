@@ -19,6 +19,7 @@ public class Evalute_result extends HttpServlet
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		HttpSession se=req.getSession();
 		int num_que_op=(Integer) se.getAttribute("avable_question_option");
 		
@@ -52,7 +53,7 @@ public class Evalute_result extends HttpServlet
 		se.setAttribute("total_marks", total_marks);
 		se.setAttribute("marks_obtain", marks_obtain);
 		se.setAttribute("test_name");
-		Result_servise servise=new Result_servise();
+		Result_servise servise=factory.getBean("result_servise");
 		servise.servise(req, res);
 	}
 
