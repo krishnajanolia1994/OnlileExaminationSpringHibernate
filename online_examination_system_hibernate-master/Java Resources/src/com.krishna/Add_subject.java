@@ -20,11 +20,13 @@ import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 
 import Org.springframwork.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframwork.context.ApplicationContext;
 import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 
 
 @Entity
+@Component
 @Chachable
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Add_subject extends HttpServlet
@@ -64,7 +66,7 @@ public class Add_subject extends HttpServlet
 				res.sendRedirect("add_subjectT.jsp");
 			}
 		}
-		Add_subject new_subject = factory.getBean(add_subject);
+		Add_subject new_subject = factory.getBean("add_subject");
 		new_subject.subject=subject_name;
 		Id id=hibernet_session.get(Id.class,1000);
 		long subject_id=id.subject_id;
