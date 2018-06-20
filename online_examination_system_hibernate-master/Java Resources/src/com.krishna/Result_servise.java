@@ -17,7 +17,7 @@ import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 
 
-
+@Component
 public class Result_servise 
 {
 	String test_name;
