@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList
 import org.hibernet.Session;
 import org.hibernet.SessionFactory;
 import org.hibernet.cfg.Configuration;
