@@ -39,6 +39,8 @@ public class Add_Qustion_Servlet extends HttpServlet
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+
 		String Question=req.getParameter("question");
 		String op1=req.getParameter("option_1");
 		String op2=req.getParameter("option_2");
@@ -54,7 +56,9 @@ public class Add_Qustion_Servlet extends HttpServlet
 		Long id=(Long)se.getAttribute("test_id");
 		Add_test add_test =hibetnet_session.get(Add_test.class,id);
 		ArraList<Add_Qustion_Servlet> question_list=add_test.question_list;
-		Add_Qustion_Servlet new_question =new Add_Qustion_Servlet();
+		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
+
+		Add_Qustion_Servlet new_question =factory.grtbean("add_qustion_servlet");
 		new_question.Question=Question;
 	        new_question.option_1=op1;
 	        new_question.option_2=op2;
@@ -65,7 +69,6 @@ public class Add_Qustion_Servlet extends HttpServlet
 		Transaction tx=hibernet_session.biginTransection();
 		hibernet_session.save(add_test)
 		tx.comit();
-		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 		add_all_Question ad=factory.getBean("add_all_question");
 		ad.get(req, res);
 	
