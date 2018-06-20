@@ -10,11 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+import org.hibernet.Session;
+import org.hibernet.SessionFactory;
+import org.hibernet.cfg.Configuration;
+import org.hibernet.Transaction;
+import org.hibernet.service.ServiceRegistry;
+import org.hibernet.service.ServiceRegistryBuilder;
+
+import org.springframework.stereotype.Component;
+import Org.springframwork.beans.factory.annotation.Autowired;
+import org.springframwork.context.ApplicationContext;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+//entity
+import javax.persitence.Entity;
+import javax.persitence.Id;
+//maping
+import javax.persitence.ManyToOne;
+import javax.persitence.Cacheable;
+
+
 @Component
 @Entity
 @Chachable
+@Component
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Student_signup extends HttpServlet 
 {
@@ -25,6 +43,7 @@ public class Student_signup extends HttpServlet
 	String email_address;
 	String password;
 	@ManyToOne(MappedBy="stud")
+	@Autowired
 	ArrayList<Result_servise> result_list=new ArryaList<Result_servise>();
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
