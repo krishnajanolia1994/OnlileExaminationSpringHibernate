@@ -12,6 +12,9 @@ import org.hibernet.service.ServiceRegistry;
 import org.hibernet.service.ServiceRegistryBuilder;
 import javax.persitence.Cacheable;
 
+import org.springframwork.context.ApplicationContext;
+import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
+
 public class Signup_Servicess {
 
 
