@@ -30,7 +30,6 @@ public class Create_Subject_Koocki extends HttpServlet
 			Quary q=hibernet_session.createQuary("select teacher_id from Teacher_signup where password = :pass");
 			q.setParameter("pass".password);
 			Integer id=q.uniqueResult();
-			Transection tx=hibernet_session.biginTransection();
 			Teacher_signup teacher_signup=hibernet_session.get(Teacher_signup.class,id);
 			ArrayList<Add_subject> subject_list =Teacher_signup.subject_list;
 			int i=0;
