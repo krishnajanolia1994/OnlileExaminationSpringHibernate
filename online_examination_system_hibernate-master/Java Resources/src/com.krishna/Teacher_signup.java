@@ -17,10 +17,12 @@ import javax.persitence.Id;
 //maping
 import javax.persitence.OneToMany;
 import javax.persitence.Cacheable;
+import org.springframework.stereotype.Component;
 
 
 @Entity
 @Chachable
+@Component
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Teacher_signup extends HttpServlet 
 {
