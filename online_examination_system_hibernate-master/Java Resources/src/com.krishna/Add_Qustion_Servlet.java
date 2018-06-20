@@ -60,7 +60,7 @@ public class Add_Qustion_Servlet extends HttpServlet
 		ArraList<Add_Qustion_Servlet> question_list=add_test.question_list;
 		ApplicationContext factory=new AnnotationConfigApplicationContext(AppConfig.class);
 
-		Add_Qustion_Servlet new_question =factory.grtbean("add_qustion_servlet");
+		Add_Qustion_Servlet new_question =factory.getBean("add_qustion_servlet");
 		new_question.Question=Question;
 	        new_question.option_1=op1;
 	        new_question.option_2=op2;
