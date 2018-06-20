@@ -19,8 +19,10 @@ import javax.persitence.ManyToOne;
 import javax.persitence.Cacheable;
 import Org.springframwork.beans.factory.annotation.Autowired;
 import org.springframwork.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import Org.springframwork.context.annotation.AnnotationConfigApplicationContext;
 @Entity
+@Component
 @Chacheble
 @Chache(Usage=ChacheConcarancyStratagy.READ_WRITE)
 public class Add_Qustion_Servlet extends HttpServlet
