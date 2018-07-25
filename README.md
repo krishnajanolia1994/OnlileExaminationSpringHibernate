@@ -9,4 +9,4 @@ Appearance of the student in test: - Student can login (or signup if he/she does
 
 Mapping: The project uses hibernate mapping annotation.
 
-Very soon; I found one major problem. When I observed this project thoroughly, I found that the data base would have huge amount of unnecessary metadata. To solve this issue, I switched
+Very soon; I found one major problem. When I observed this project thoroughly, I found that the data base would have huge amount of unnecessary metadata. To solve this issue, I used hibernate mapping.
